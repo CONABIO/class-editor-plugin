@@ -96,3 +96,5 @@ ENV/
 # plugin settings page (build automatically)
 +docs/settingsconf.rst.DS_Store
 .settings
+.proyect
+.pyproyect
