@@ -19,5 +19,5 @@ By selecting a group of features, the user is able to change the class assigned 
 ![Simple shape file](images/qgis1.png)
 
 
-![Plugin main dialog](images/qgis1.png)
+![Plugin main dialog](images/qgis2.png)
 

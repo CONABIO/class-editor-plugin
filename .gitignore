@@ -94,4 +94,4 @@ ENV/
 .ropeproject
 
 # plugin settings page (build automatically)
-+docs/settingsconf.rst
++docs/settingsconf.rst.DS_Store
