@@ -33,7 +33,7 @@ from classeditor_form import *
 
 def get_class_dic():
     
-    level_1 = ['TIERRAS FORESTALES', 'PRADERAS', 'HUMEDAL', 'TIERRAS DE USO AGRICOLA', 'AGUA', 'ASENTAMIENTOS', 'OTROS', 'INDEFINIDO']
+    level_1 = ['TIERRAS FORESTALES', 'PRADERAS', 'HUMEDAL', 'TIERRAS DE USO AGRICOLA', 'CUERPO DE AGUA', 'ASENTAMIENTOS', 'OTROS', 'INDEFINIDO']
     level_2 = {
                'TIERRAS FORESTALES':['BOSQUE DE CONIFERAS',
                                      'BOSQUE DE ENCINO',
@@ -45,7 +45,7 @@ def get_class_dic():
                'PRADERAS':['PASTIZALES'],
                'HUMEDAL':['VEGETACION HIDROFILA'],
                'TIERRAS DE USO AGRICOLA':['AGRICULTURA'],
-               'AGUA':['AGUA'],
+               'CUERPO DE AGUA':['CUERPO DE AGUA'],
                'ASENTAMIENTOS':['URBANO Y CONSTRUIDO'],
                'OTROS':['SUELO DESNUDO', 'NIEVE Y HIELO'],
                'INDEFINIDO':['INDEFINIDO']
@@ -61,7 +61,7 @@ def get_class_dic():
                 'PASTIZALES':['PASTIZAL GIPSOFILO', 'PASTIZAL HALOFILO', 'PASTIZAL NATURAL', 'PRADERA DE ALTA MONTANA', 'SABANA', 'DUNAS COSTERAS', 'PASTIZAL INDUCIDO', 'VEGETACION DE DUNAS COSTERAS', 'SABANOIDE', 'PASTIZAL CULTIVADO'],
                 'VEGETACION HIDROFILA':['POPAL', 'TULAR', 'VEGETACION HALOFILA HIDROFILA'],
                 'AGRICULTURA':['AGRICULTURA DE HUMEDAD', 'AGRICULTURA DE RIEGO', 'AGRICULTURA DE TEMPORAL'],
-                'AGUA':['ACUICOLA', 'AGUA'],
+                'CUERPO DE AGUA':['ACUICOLA', 'AGUA'],
                 'URBANO Y CONSTRUIDO':['ASENTAMIENTOS HUMANOS', 'ZONA URBANA'],
                 'SUELO DESNUDO':['SIN VEGETACION APARENTE', 'DESPROVISTO DE VEGETACION'],
                 'NIEVE Y HIELO':['NIEVE', 'HIELO'],
@@ -137,7 +137,7 @@ class classeditor_update_selected_dialog(QDialog, Ui_classeditor_form):
 		
 		
                 if haseditorfield == False:
-                    QMessageBox.information(self.iface.mainWindow(), "Hasfiels", "Has field %s" % (str("Ich mach das jettzt")))
+                    #QMessageBox.information(self.iface.mainWindow(), "Hasfiels", "Has field %s" % (str("Ich mach das jettzt")))
                     layer.startEditing()
                     res = layer.dataProvider().addAttributes([ QgsField("editor", QVariant.String) ])
                     layer.commitChanges()
@@ -184,29 +184,17 @@ class classeditor_update_selected_dialog(QDialog, Ui_classeditor_form):
                 elif (nF == 0):
                     infoString = "<font color='magenta'> Please select some elements into current <b>" + layer.name() + "</b> layer</font>"
                     self.label.setText(infoString)
-                    self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
-                    self.classlevel1_comboBox.setEnabled(False)
-                    self.classlevel2_comboBox.setEnabled(False)
-                    self.classlevel3_comboBox.setEnabled(False)
-                    self.classlevel4_comboBox.setEnabled(False)
+                    toggle_options(self, False)
 
             else:
                 infoString = "<font color='red'> <b>No vector layer selected... Select a vector layer from the layer list...</b></font>"
                 self.label.setText(infoString)
-                self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
-                self.classlevel1_comboBox.setEnabled(False)
-                self.classlevel2_comboBox.setEnabled(False)
-                self.classlevel3_comboBox.setEnabled(False)
-                self.classlevel4_comboBox.setEnabled(False)  
+                toggle_options(self, False)
 
         else:
             infoString = "<font color='red'> <b>No layer selected... Select a layer from the layer list...</b></font>"
             self.label.setText(infoString)
-            self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
-            self.classlevel1_comboBox.setEnabled(False)
-            self.classlevel2_comboBox.setEnabled(False)
-            self.classlevel3_comboBox.setEnabled(False)
-            self.classlevel4_comboBox.setEnabled(False)
+            
 
     def on_combo1_activated(self, text):
         self.classlevel2_comboBox.clear()
@@ -221,8 +209,13 @@ class classeditor_update_selected_dialog(QDialog, Ui_classeditor_form):
         self.classlevel4_comboBox.clear()
         self.classlevel3_comboBox.addItems(self.level_3[str(self.classlevel2_comboBox.currentText())])
         self.classlevel4_comboBox.addItems(self.level_4[str(self.classlevel2_comboBox.currentText())])
-
- 
+    
+    def toggle_options(self, enable):
+        self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(enable)
+        self.classlevel1_comboBox.setEnabled(enable)
+        self.classlevel2_comboBox.setEnabled(enable)
+        self.classlevel3_comboBox.setEnabled(enable)
+        self.classlevel4_comboBox.setEnabled(enable)
                 
 
     def run(self):
