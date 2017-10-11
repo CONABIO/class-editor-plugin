@@ -11,3 +11,13 @@ In order to use the plugin, this repository must be cloned or downloaded into a 
 ```
 
 Then, after restarting QGIS the plugin should be available from the plugins menu.
+
+## Details
+
+By selecting a group of features, the user is able to change the class assigned in each of four levels of aggregation.
+
+![Simple shape file](images/qgis1.png)
+
+
+![Plugin main dialog](images/qgis1.png)
+
