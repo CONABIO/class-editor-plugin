@@ -1,4 +1,4 @@
-# Class Edito Plugin
+# Class Editor Plugin
 
 The class editor plugin is a QGIS plugin that allows to relabel geometries in a shape file. Classes loaded into the plugin are specific to the Mexican landcover classification scheme established by INEGI.
 
